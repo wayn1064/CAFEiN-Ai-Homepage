@@ -100,7 +100,8 @@ try:
     networks:
       - wayn-network
 '''
-    content = content.replace('services:\n', 'services:\n' + service_block)
+    # Use robust regex replacement to handle \r or trailing spaces after 'services:'
+    content = re.sub(r'^services:\s*$', 'services:\n' + service_block, content, flags=re.MULTILINE)
     
     # Nginx에 8013 포트 확보 (이미 있으면 스킵)
     if '8013:8013' not in content:
