@@ -48,6 +48,7 @@ function App() {
         solutionType: 'CAFEiN-Ai',
         hospitalName: formData.cafeName, // WAYN-Ai 백엔드 호환성을 위한 맵핑
         contactNumber: formData.phone,
+        businessRegistrationNumber: formData.businessId,
         ...formData
       };
       await axios.post('http://34.158.193.220/api/wayn-ai/registrations', payload);

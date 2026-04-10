@@ -1,0 +1,324 @@
+version: '3.8'
+
+services:
+  cafein-ai-homepage:
+    container_name: cafein-ai-homepage
+    image: xxx
+    restart: always
+    networks:
+      - wayn-network
+  # ==========================================
+  # 0. PostgreSQL DB
+  # ==========================================
+  postgresql-db:
+    image: postgres:15-alpine
+    container_name: postgresql-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '!zxasqw12@'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # [메인 프록시 서버]
+  # ==========================================
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "8013:8013"
+      - "80:80"
+      - "443:443"
+      - "8001:8001"
+      - "8002:8002"
+      - "8003:8003"
+      - "8004:8004"
+      - "8005:8005"
+      - "8006:8006"
+      - "8007:8007"
+      - "8008:8008"
+      - "8009:8009"
+      - "8010:8010"
+      - "8011:8011"
+      - "8012:8012"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 1. WAYN-Ai
+  # ==========================================
+  wayn-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/wayn-ai-frontend:latest
+    container_name: wayn-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  wayn-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/wayn-ai-backend:latest
+    container_name: wayn-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5001"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/wayn-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 2. DENTi-Ai
+  # ==========================================
+  denti-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/denti-ai-frontend:latest
+    container_name: denti-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  denti-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/denti-ai-backend:latest
+    container_name: denti-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5002"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/denti-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 3. CAFEiN-Ai
+  # ==========================================
+  cafein-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/cafein-ai-frontend:latest
+    container_name: cafein-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  cafein-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/cafein-ai-backend:latest
+    container_name: cafein-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5003"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/cafein-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 4. iNDUSTRY-Ai
+  # ==========================================
+  industry-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/industry-ai-frontend:latest
+    container_name: industry-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  industry-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/industry-ai-backend:latest
+    container_name: industry-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5004"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/industry-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 5. LOGiS-Ai
+  # ==========================================
+  logis-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/logis-ai-frontend:latest
+    container_name: logis-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  logis-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/logis-ai-backend:latest
+    container_name: logis-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5005"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/logis-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 6. DENTiONBOARD-Ai
+  # ==========================================
+  dentionboard-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/dentionboard-ai-frontend:latest
+    container_name: dentionboard-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  dentionboard-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/dentionboard-ai-backend:latest
+    container_name: dentionboard-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5006"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/dentionboard-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 7. GiFT-Ai
+  # ==========================================
+  gift-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/gift-ai-frontend:latest
+    container_name: gift-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  gift-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/gift-ai-backend:latest
+    container_name: gift-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5007"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/gift-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 8. MEDiART-Ai
+  # ==========================================
+  mediart-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediart-ai-frontend:latest
+    container_name: mediart-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  mediart-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediart-ai-backend:latest
+    container_name: mediart-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5008"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/mediart-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 9. MEDiJOB-Ai
+  # ==========================================
+  medijob-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medijob-ai-frontend:latest
+    container_name: medijob-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  medijob-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medijob-ai-backend:latest
+    container_name: medijob-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5009"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/medijob-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 10. MEDiLOGiS-Ai
+  # ==========================================
+  medilogis-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medilogis-ai-frontend:latest
+    container_name: medilogis-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  medilogis-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medilogis-ai-backend:latest
+    container_name: medilogis-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5010"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/medilogis-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 11. MEDiEDU-Ai
+  # ==========================================
+  mediedu-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediedu-ai-frontend:latest
+    container_name: mediedu-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  mediedu-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediedu-ai-backend:latest
+    container_name: mediedu-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5011"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/mediedu-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 12. MEDiEVENTALL-Ai
+  # ==========================================
+  medieventall-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medieventall-ai-frontend:latest
+    container_name: medieventall-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  medieventall-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medieventall-ai-backend:latest
+    container_name: medieventall-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5012"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/medieventall-ai-db?schema=public
+    networks:
+      - wayn-network
+
+networks:
+  wayn-network:
+    driver: bridge
+
+volumes:
+  pgdata:
