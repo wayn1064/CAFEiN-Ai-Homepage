@@ -80,5 +80,11 @@ jobs:
             mkdir -p nginx/conf.d
             printf 'server {\n    listen 8013;\n    server_name _;\n\n    location / {\n        proxy_pass http://%s:80;\n        proxy_set_header Host \$host;\n        proxy_set_header X-Real-IP \$remote_addr;\n        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \$scheme;\n    }\n\n    location /api/cafein/ {\n        proxy_pass http://wayn-ai-backend:3000/api/cafein/;\n        proxy_set_header Host \$host;\n        proxy_set_header X-Real-IP \$remote_addr;\n        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \$scheme;\n    }\n}\n' '${{ env.SERVICE_NAME }}' > nginx/conf.d/${{ env.SERVICE_NAME }}.conf
             
-            docker-compose -f GCE_docker-compose.prod.yml restart nginx
+            # docker-compose 파일의 Nginx ports 하위에 8013번 포트를 자동 맵핑 (기존에 없으면)
+            if ! grep -q '"8013:8013"' GCE_docker-compose.prod.yml; then
+              perl -0777 -pi -e 's/(^\s*nginx:.*?\n\s*ports:\n)/$1      - "8013:8013"\n/sm' GCE_docker-compose.prod.yml
+            fi
+            
+            # 포트가 추가되었으므로 restart가 아닌 up -d 로 컨테이너를 재생성해야 함
+            docker-compose -f GCE_docker-compose.prod.yml up -d nginx
           "
