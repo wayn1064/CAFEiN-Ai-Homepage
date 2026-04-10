@@ -1,0 +1,455 @@
+==== DOCKER PS ====
+CONTAINER ID   IMAGE                                                                                     COMMAND                  CREATED        STATUS        PORTS                                                                                                                                           NAMES
+de5ec616d896   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/cafein-ai-homepage:latest         "/docker-entrypoint.…"   3 hours ago    Up 3 hours    80/tcp                                                                                                                                          wayn-deployment-cafein-ai-homepage-1
+3e6e031e0817   nginx:alpine                                                                              "/docker-entrypoint.…"   4 hours ago    Up 4 hours    0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp, 0.0.0.0:8001-8013->8001-8013/tcp, [::]:8001-8013->8001-8013/tcp   nginx
+f41c3306346c   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/wayn-ai-frontend:latest           "/docker-entrypoint.…"   6 hours ago    Up 6 hours    80/tcp                                                                                                                                          wayn-ai-frontend
+32fac422583f   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/cafein-ai-frontend:latest         "/docker-entrypoint.…"   20 hours ago   Up 20 hours   80/tcp                                                                                                                                          cafein-ai-frontend
+5fe541a68a4a   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/cafein-ai-backend:latest          "docker-entrypoint.s…"   20 hours ago   Up 20 hours   5003/tcp                                                                                                                                        cafein-ai-backend
+0193edfbeeca   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediart-ai-backend:latest         "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5001/tcp, 5008/tcp                                                                                                                              mediart-ai-backend
+232a1279b95c   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/gift-ai-frontend:latest           "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          gift-ai-frontend
+284490ee4e01   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medilogis-ai-backend:latest       "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5010/tcp                                                                                                                                        medilogis-ai-backend
+7ae90838c45d   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediedu-ai-backend:latest         "tail -f /dev/null"      33 hours ago   Up 33 hours   5011/tcp                                                                                                                                        mediedu-ai-backend
+5aee25a5c76f   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medijob-ai-backend:latest         "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5001/tcp, 5009/tcp                                                                                                                              medijob-ai-backend
+93878591feb2   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/gift-ai-backend:latest            "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5001/tcp, 5007/tcp                                                                                                                              gift-ai-backend
+b1adcc6849b3   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medilogis-ai-frontend:latest      "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          medilogis-ai-frontend
+d4464eccb9d7   postgres:15-alpine                                                                        "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5432/tcp                                                                                                                                        postgresql-db
+327872ae417e   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/dentionboard-ai-frontend:latest   "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          dentionboard-ai-frontend
+7b4fffbc4f3b   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medieventall-ai-frontend:latest   "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          medieventall-ai-frontend
+1327e8874d7b   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/dentionboard-ai-backend:latest    "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5006/tcp                                                                                                                                        dentionboard-ai-backend
+903efdf734dd   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/denti-ai-backend:latest           "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5002/tcp                                                                                                                                        denti-ai-backend
+5c7b8c5ec30a   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/industry-ai-frontend:latest       "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          industry-ai-frontend
+92106a26472a   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/industry-ai-backend:latest        "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5001/tcp, 5004/tcp                                                                                                                              industry-ai-backend
+1ed1b3fe6ce7   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medijob-ai-frontend:latest        "docker-entrypoint.s…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          medijob-ai-frontend
+cd5424740287   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/denti-ai-frontend:latest          "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          denti-ai-frontend
+1f53f58bb4f2   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/wayn-ai-backend:latest            "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5001/tcp                                                                                                                                        wayn-ai-backend
+8e22220aaa07   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/logis-ai-backend:latest           "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5005/tcp                                                                                                                                        logis-ai-backend
+a72f652254b4   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediart-ai-frontend:latest        "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          mediart-ai-frontend
+f075474b7165   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medieventall-ai-backend:latest    "docker-entrypoint.s…"   33 hours ago   Up 33 hours   5012/tcp                                                                                                                                        medieventall-ai-backend
+dc94d4be6769   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/logis-ai-frontend:latest          "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          logis-ai-frontend
+a8d950b52b5b   asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediedu-ai-frontend:latest        "/docker-entrypoint.…"   33 hours ago   Up 33 hours   80/tcp                                                                                                                                          mediedu-ai-frontend
+==== NGINX PORTS ====
+80/tcp -> 0.0.0.0:80
+80/tcp -> [::]:80
+443/tcp -> 0.0.0.0:443
+443/tcp -> [::]:443
+8001/tcp -> 0.0.0.0:8001
+8001/tcp -> [::]:8001
+8002/tcp -> 0.0.0.0:8002
+8002/tcp -> [::]:8002
+8003/tcp -> 0.0.0.0:8003
+8003/tcp -> [::]:8003
+8004/tcp -> 0.0.0.0:8004
+8004/tcp -> [::]:8004
+8005/tcp -> 0.0.0.0:8005
+8005/tcp -> [::]:8005
+8006/tcp -> 0.0.0.0:8006
+8006/tcp -> [::]:8006
+8007/tcp -> 0.0.0.0:8007
+8007/tcp -> [::]:8007
+8008/tcp -> 0.0.0.0:8008
+8008/tcp -> [::]:8008
+8009/tcp -> 0.0.0.0:8009
+8009/tcp -> [::]:8009
+8010/tcp -> 0.0.0.0:8010
+8010/tcp -> [::]:8010
+8011/tcp -> 0.0.0.0:8011
+8011/tcp -> [::]:8011
+8012/tcp -> 0.0.0.0:8012
+8012/tcp -> [::]:8012
+8013/tcp -> 0.0.0.0:8013
+8013/tcp -> [::]:8013
+==== COMPOSE FILE ====
+version: '3.8'
+
+services:
+  cafein-ai-homepage:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/cafein-ai-homepage:latest
+    restart: always
+
+  # ==========================================
+  # 0. PostgreSQL DB
+  # ==========================================
+  postgresql-db:
+    image: postgres:15-alpine
+    container_name: postgresql-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '!zxasqw12@'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # [메인 프록시 서버]
+  # ==========================================
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "8013:8013"
+      - "80:80"
+      - "443:443"
+      - "8001:8001"
+      - "8002:8002"
+      - "8003:8003"
+      - "8004:8004"
+      - "8005:8005"
+      - "8006:8006"
+      - "8007:8007"
+      - "8008:8008"
+      - "8009:8009"
+      - "8010:8010"
+      - "8011:8011"
+      - "8012:8012"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 1. WAYN-Ai
+  # ==========================================
+  wayn-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/wayn-ai-frontend:latest
+    container_name: wayn-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  wayn-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/wayn-ai-backend:latest
+    container_name: wayn-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5001"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/wayn-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 2. DENTi-Ai
+  # ==========================================
+  denti-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/denti-ai-frontend:latest
+    container_name: denti-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  denti-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/denti-ai-backend:latest
+    container_name: denti-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5002"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/denti-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 3. CAFEiN-Ai
+  # ==========================================
+  cafein-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/cafein-ai-frontend:latest
+    container_name: cafein-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  cafein-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/cafein-ai-backend:latest
+    container_name: cafein-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5003"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/cafein-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 4. iNDUSTRY-Ai
+  # ==========================================
+  industry-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/industry-ai-frontend:latest
+    container_name: industry-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  industry-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/industry-ai-backend:latest
+    container_name: industry-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5004"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/industry-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 5. LOGiS-Ai
+  # ==========================================
+  logis-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/logis-ai-frontend:latest
+    container_name: logis-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  logis-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/logis-ai-backend:latest
+    container_name: logis-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5005"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/logis-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 6. DENTiONBOARD-Ai
+  # ==========================================
+  dentionboard-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/dentionboard-ai-frontend:latest
+    container_name: dentionboard-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  dentionboard-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/dentionboard-ai-backend:latest
+    container_name: dentionboard-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5006"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/dentionboard-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 7. GiFT-Ai
+  # ==========================================
+  gift-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/gift-ai-frontend:latest
+    container_name: gift-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  gift-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/gift-ai-backend:latest
+    container_name: gift-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5007"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/gift-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 8. MEDiART-Ai
+  # ==========================================
+  mediart-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediart-ai-frontend:latest
+    container_name: mediart-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  mediart-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediart-ai-backend:latest
+    container_name: mediart-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5008"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/mediart-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 9. MEDiJOB-Ai
+  # ==========================================
+  medijob-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medijob-ai-frontend:latest
+    container_name: medijob-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  medijob-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medijob-ai-backend:latest
+    container_name: medijob-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5009"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/medijob-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 10. MEDiLOGiS-Ai
+  # ==========================================
+  medilogis-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medilogis-ai-frontend:latest
+    container_name: medilogis-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  medilogis-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medilogis-ai-backend:latest
+    container_name: medilogis-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5010"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/medilogis-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 11. MEDiEDU-Ai
+  # ==========================================
+  mediedu-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediedu-ai-frontend:latest
+    container_name: mediedu-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  mediedu-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/mediedu-ai-backend:latest
+    container_name: mediedu-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5011"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/mediedu-ai-db?schema=public
+    networks:
+      - wayn-network
+
+  # ==========================================
+  # 12. MEDiEVENTALL-Ai
+  # ==========================================
+  medieventall-ai-frontend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medieventall-ai-frontend:latest
+    container_name: medieventall-ai-frontend
+    restart: always
+    mem_limit: 150m
+    networks:
+      - wayn-network
+  medieventall-ai-backend:
+    image: asia-northeast3-docker.pkg.dev/wayn-492112/wayn-ai-repo/medieventall-ai-backend:latest
+    container_name: medieventall-ai-backend
+    restart: always
+    mem_limit: 300m
+    expose:
+      - "5012"
+    environment:
+      - DATABASE_URL=postgresql://postgres:%21zxasqw12%40@postgresql-db:5432/medieventall-ai-db?schema=public
+    networks:
+      - wayn-network
+
+networks:
+  wayn-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+==== NGINX CONF ====
+server {
+    listen 8013;
+    server_name _;
+
+    location / {
+        proxy_pass http://cafein-ai-homepage:80;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /api/cafein/ {
+        proxy_pass http://wayn-ai-backend:3000/api/cafein/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+==== NGINX ERROR LOG ====
+3.131.220.121 - - [10/Apr/2026:08:51:12 +0000] "\x16\x03\x01\x00{\x01\x00\x00w\x03\x03x\xEC\xB0\xFB&\xA9\xDC\xA1\xAB\xF14%\xC5\xDE\xB3P\xF4h\xC2p}2.\xC8_\x98<\xB4BK.@\x00\x00\x1A\xC0/\xC0+\xC0\x11\xC0\x07\xC0\x13\xC0\x09\xC0\x14\xC0" 400 157 "-" "-"
+3.131.220.121 - - [10/Apr/2026:08:51:29 +0000] "SSH-2.0-Go" 400 157 "-" "-"
+147.185.132.172 - - [10/Apr/2026:08:51:33 +0000] "GET / HTTP/1.1" 200 650 "-" "Hello from Palo Alto Networks, find out more about our scans in https://docs-cortex.paloaltonetworks.com/r/1/Cortex-Xpanse/Scanning-activity"
+3.131.220.121 - - [10/Apr/2026:08:52:33 +0000] "\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\xA7\x8CF\x0F\x16\xC2\x18=" 400 157 "-" "-"
+66.132.195.102 - - [10/Apr/2026:09:00:20 +0000] "GET / HTTP/1.1" 200 479 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.102 - - [10/Apr/2026:09:00:20 +0000] "PRI * HTTP/2.0" 400 157 "-" "-"
+66.132.195.102 - - [10/Apr/2026:09:00:20 +0000] "GET /vite.svg HTTP/1.1" 200 1497 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.102 - - [10/Apr/2026:09:00:21 +0000] "GET /favicon.ico HTTP/1.1" 200 479 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.102 - - [10/Apr/2026:09:00:22 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03\x88\x01\x09D\x07B\x5C-\xD1\x85Q\xEFR\x8D\x9Bom\x11\xA4s\xF1\xB7O\x9C\xAC\xFDj\xFD\x82\x1A\xAB\x15 \x05>O\xD0\x9EP\xDCpK\xA1+\x02\xC2M\x03\xBB:\x07\xC4\xD0X\x15j\x067`_\xFA\xA3\x1Bm\xED\x00&\xCC\xA8\xCC\xA9\xC0/\xC00\xC0+\xC0,\xC0\x13\xC0\x09\xC0\x14\xC0" 400 157 "-" "-"
+66.132.195.102 - - [10/Apr/2026:09:00:24 +0000] "GET /.well-known/security.txt HTTP/1.1" 200 479 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.102 - - [10/Apr/2026:09:00:25 +0000] "GET /favicon.ico HTTP/1.1" 200 479 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.102 - - [10/Apr/2026:09:00:25 +0000] "GET /ic3ible04 HTTP/1.1" 200 479 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.102 - - [10/Apr/2026:09:00:26 +0000] "GET /favicon.ico HTTP/1.1" 200 479 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.102 - - [10/Apr/2026:09:00:27 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03\x19\x01m\x9A\x8D\xE8\x83*\xED\xFF&\xE0=}\xB9o|\xF38\x1D\xEDh\xA6\x89\xEC\xA9l" 400 157 "-" "-"
+66.132.195.102 - - [10/Apr/2026:09:00:27 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03\xACD\xF8)m\x99!\xDD>\xA7\x91\xF95\xA6I\x9A\x16" 400 157 "-" "-"
+162.216.149.115 - - [10/Apr/2026:09:18:24 +0000] "\x16\x03\x01\x05\xC6\x01\x00\x05\xC2\x03\x03M\xE6\x16\xDC\x13{2\xA2|\xD3\x971`\xA4^\xE2\xF4\xC4,\xD1\x87\xE4\x04\xDB}d\xD7U*\x1C\xCC\x06 9\x12\x07wk?\x83\xE9<\xB5\xD8\xCD,\x01\x08\xEEa\xFE\xC2,\xF1\xED=j\xCA\xB6$\xD3g\x93J\xD1\x00\x1A\xC0+\xC0/\xC0,\xC00\xCC\xA9\xCC\xA8\xC0\x09\xC0\x13\xC0" 400 157 "-" "-"
+162.216.149.115 - - [10/Apr/2026:09:18:24 +0000] "\x16\x03\x01\x00\xCA\x01\x00\x00\xC6\x03\x03GJr\xC35\xDE\xD3\xA4\xB4-w'\xE6o\xD7<A\xBA\x0EI\x90\x8DG\x94\x9F7\xDB\x17\xE6Z\xD3\x8A\x00\x00h\xCC\x14\xCC\x13\xC0/\xC0+\xC00\xC0,\xC0\x11\xC0\x07\xC0'\xC0#\xC0\x13\xC0\x09\xC0(\xC0$\xC0\x14\xC0" 400 157 "-" "-"
+87.121.84.8 - - [10/Apr/2026:09:20:11 +0000] "GET / HTTP/1.1" 200 479 "-" "Mozilla/1.0"
+162.216.149.172 - - [10/Apr/2026:09:25:24 +0000] "\x16\x03\x01\x05\xC6\x01\x00\x05\xC2\x03\x03\x03\x8D\xA9\x88y\x0F\x07\x91\x82\xB5=\xC25\x8E\xE7\x17B\xA7\x89\xEA\xFAJ,\x14n\xF27.\x0F\xE3:\xB3 \xE6'\xAE\xCDg" 400 157 "-" "-"
+162.216.149.172 - - [10/Apr/2026:09:25:24 +0000] "\x16\x03\x01\x00\xCA\x01\x00\x00\xC6\x03\x03s\x11\x7F\xD94w\x0B\xA43\xC8\x1F\x06\x0F\xC7\xF9/\xB6+\xA1\xD1\x80s\x0B\xD7\xC3eD\x1D%\xDA\xF4\xE6\x00\x00h\xCC\x14\xCC\x13\xC0/\xC0+\xC00\xC0,\xC0\x11\xC0\x07\xC0'\xC0#\xC0\x13\xC0\x09\xC0(\xC0$\xC0\x14\xC0" 400 157 "-" "-"
+45.33.12.122 - - [10/Apr/2026:09:32:28 +0000] "GET / HTTP/1.1" 200 479 "-" "Mozilla/5.0 zgrab/0.x"
+194.195.210.47 - - [10/Apr/2026:09:32:42 +0000] "GET / HTTP/1.1" 200 479 "-" "Mozilla/5.0 zgrab/0.x"
+34.78.28.28 - - [10/Apr/2026:09:37:36 +0000] "GET / HTTP/1.1" 200 479 "-" "python-requests/2.32.5"
+78.153.140.39 - - [10/Apr/2026:09:39:00 +0000] "GET /.env HTTP/1.1" 200 479 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.140 Safari/537.36"
+78.153.140.39 - - [10/Apr/2026:09:39:00 +0000] "POST / HTTP/1.1" 405 559 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.140 Safari/537.36"
+80.66.83.43 - - [10/Apr/2026:09:40:07 +0000] "\x03\x00\x00/*\xE0\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 157 "-" "-"
+115.139.36.144 - - [10/Apr/2026:09:40:35 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+115.139.36.144 - - [10/Apr/2026:09:40:35 +0000] "GET /assets/index-Bht_j3Xt.js HTTP/1.1" 304 0 "http://34.158.193.220:8007/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+115.139.36.144 - - [10/Apr/2026:09:40:35 +0000] "GET /assets/index-D8qmXFQO.css HTTP/1.1" 304 0 "http://34.158.193.220:8007/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+66.132.195.114 - - [10/Apr/2026:09:41:01 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03 \x88\x86I\xB9\x8A\x8A\x15\xF9\x01\x98\xAC0\x1C\xC7\xA0n)\xD5\xAE\xCFX\xA3\xB9\xDB\xE0k\xD9\xFB\x01n\xD0 (\xA6\x9D\xF8\xB0lH\xD4\x8B[^\xDE#S\x1Fw\xAD\x91\xCBu\x16\xCCz8\xBA#m\x84\xD4\xB2\x1C\x00\x00&\xCC\xA8\xCC\xA9\xC0/\xC00\xC0+\xC0,\xC0\x13\xC0\x09\xC0\x14\xC0" 400 157 "-" "-"
+66.132.195.114 - - [10/Apr/2026:09:41:05 +0000] "GET / HTTP/1.1" 200 423 "-" "-"
+66.132.195.114 - - [10/Apr/2026:09:41:09 +0000] "GET / HTTP/1.1" 200 423 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.114 - - [10/Apr/2026:09:41:09 +0000] "PRI * HTTP/2.0" 400 157 "-" "-"
+66.132.195.114 - - [10/Apr/2026:09:41:09 +0000] "GET /favicon.ico HTTP/1.1" 200 423 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.114 - - [10/Apr/2026:09:41:12 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03\xED\x12\x02a\x9F\xC2l2\xD0\x92\x1BL\x07P\x81\xFA9\xE8g\xFDC]A\x9C\xD1>\x8BD\xCA\x1DU\x90 \x18\xB8F\xDD]\xA3\xA1%&|\x15\x89\x8Bn\x96\x7F\x95-z\xDE&~<\x11\xC8\x1D\xD5\x14\x04\x0B]\xEA\x00&\xCC\xA8\xCC\xA9\xC0/\xC00\xC0+\xC0,\xC0\x13\xC0\x09\xC0\x14\xC0" 400 157 "-" "-"
+66.132.195.114 - - [10/Apr/2026:09:41:13 +0000] "GET /security.txt HTTP/1.1" 200 423 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.114 - - [10/Apr/2026:09:41:14 +0000] "GET /favicon.ico HTTP/1.1" 200 423 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.114 - - [10/Apr/2026:09:41:14 +0000] "GET /t8uv73g83h6 HTTP/1.1" 200 423 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.114 - - [10/Apr/2026:09:41:15 +0000] "GET /favicon.ico HTTP/1.1" 200 423 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+66.132.195.114 - - [10/Apr/2026:09:41:18 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03\x8B\x8A\xE9}\xDCc\xC3\xEE\x80Q\x9D\x10ta\x22m\xC8\x9F\xF2\xE7\xB4\x14\xE9\xF7\x1ARs\xE5\xA8\x15E\x82 \x10\x008\x03\x04\xEE\xFF\x8D\x19\xFDw\x1B\xC2\x92\xE6\x90\x9B\xC2-`\x7F\xAC:b\x0C\xF9\x05DO\xAC\x86\x9A\x00&\xCC\xA8\xCC\xA9\xC0/\xC00\xC0+\xC0,\xC0\x13\xC0\x09\xC0\x14\xC0" 400 157 "-" "-"
+66.132.195.114 - - [10/Apr/2026:09:41:18 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03\xFAB\xB7{v\x05\x1E\xD5\x15Y\x1EX-" 400 157 "-" "-"
+115.139.36.144 - - [10/Apr/2026:09:45:45 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+115.139.36.144 - - [10/Apr/2026:09:45:45 +0000] "GET /assets/index-DWGjLI3y.js HTTP/1.1" 304 0 "http://34.158.193.220:8012/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+115.139.36.144 - - [10/Apr/2026:09:45:45 +0000] "GET /assets/index-BexYJpUR.css HTTP/1.1" 304 0 "http://34.158.193.220:8012/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+64.62.197.77 - - [10/Apr/2026:09:46:32 +0000] "GET / HTTP/1.1" 200 479 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:142.0) Gecko/20100101 Firefox/142.0"
+64.62.197.77 - - [10/Apr/2026:09:47:37 +0000] "GET /webui/ HTTP/1.1" 200 479 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+64.62.197.88 - - [10/Apr/2026:09:49:06 +0000] "GET /favicon.ico HTTP/1.1" 200 479 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+64.62.197.77 - - [10/Apr/2026:09:49:46 +0000] "\x16\x03\x01\x00\xF2\x01\x00\x00\xEE\x03\x03\xCC\x9C}\xD3\xC9F\xF8\x0C%\xBC<\x08\xE5 \xB3\x9F\x05\x10`\x95P\xEC\xBC\x02\x8B\xA62.m" 400 157 "-" "-"
+64.62.197.77 - - [10/Apr/2026:09:49:46 +0000] "GET /vite.svg HTTP/1.1" 200 1497 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.21"
+64.62.197.77 - - [10/Apr/2026:09:50:22 +0000] "GET /geoserver/web/ HTTP/1.1" 200 479 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:142.0) Gecko/20100101 Firefox/142.0"
