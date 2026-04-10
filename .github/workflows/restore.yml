@@ -1,0 +1,35 @@
+name: Restore Compose file
+
+on:
+  push:
+    branches:
+      - backup
+
+env:
+  GCE_INSTANCE: "wayn-server"
+  GCE_ZONE: "asia-northeast3-a"
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: 'projects/966609209672/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions@wayn-492112.iam.gserviceaccount.com'
+
+      - name: Upload Repaired Compose File
+        run: |
+          gcloud compute scp corrupted-compose.yml wayn-ai@${{ env.GCE_INSTANCE }}:~/wayn-deployment/GCE_docker-compose.prod.yml --zone=${{ env.GCE_ZONE }}
+          gcloud compute ssh wayn-ai@${{ env.GCE_INSTANCE }} --zone=${{ env.GCE_ZONE }} --command="
+            cd ~/wayn-deployment
+            docker-compose -f GCE_docker-compose.prod.yml up -d
+          "
