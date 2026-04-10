@@ -14,8 +14,6 @@ env:
 jobs:
   restore:
     runs-on: ubuntu-latest
-  workflow_dispatch:
-
     permissions:
       contents: 'read'
       id-token: 'write'
