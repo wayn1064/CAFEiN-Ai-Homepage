@@ -3,7 +3,7 @@ name: Restore Compose file
 on:
   push:
     branches:
-      - backup
+      - main
 
 env:
   GCE_INSTANCE: "wayn-server"
