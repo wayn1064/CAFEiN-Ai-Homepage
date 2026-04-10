@@ -43,14 +43,18 @@ function App() {
     setErrorMsg('');
 
     try {
-      // CAFEiN-Ai 벡엔드 모듈로 전송 (Nginx 리버스 프록시를 통해 WAYN-Ai로 라우팅됨)
-      await axios.post('/api/cafein/register', formData);
+      // CAFEiN-Ai 벡엔드 모듈로 전송 (Nginx 리버스 프록시를 통해 WAYN-Ai 백엔드 직접 전송)
+      const payload = {
+        solutionType: 'CAFEiN-Ai',
+        hospitalName: formData.cafeName, // WAYN-Ai 백엔드 호환성을 위한 맵핑
+        contactNumber: formData.phone,
+        ...formData
+      };
+      await axios.post('http://34.158.193.220/api/wayn-ai/registrations', payload);
       setIsSuccess(true);
     } catch (error) {
       console.error('Registration error:', error);
-      // For demonstration, act like it's a success if API fails because it's a mock URL
-      // TODO: Change this logic when backend is ready
-      setIsSuccess(true);
+      setErrorMsg('가입 신청 중 서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
     } finally {
       setIsSubmitting(false);
     }
