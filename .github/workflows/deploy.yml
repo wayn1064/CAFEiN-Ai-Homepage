@@ -67,30 +67,50 @@ jobs:
             
             # Python 코드로 안전하게 YAML을 수정하여 포트 중복이나 에러를 원천 차단
             cat << 'PYTHONEOF' > update_compose.py
-import sys, json
+import sys, json, re
 
 try:
     with open('GCE_docker-compose.prod.yml', 'r') as f:
         content = f.read()
 
-    # cafein-ai-homepage 서비스 추가/수정
-    if '  ${{ env.SERVICE_NAME }}:' not in content:
-        service_block = '''  ${{ env.SERVICE_NAME }}:
+    # Remove existing service block if it exists
+    lines = content.split('\n')
+    new_lines = []
+    skip = False
+    for line in lines:
+        if line.startswith('  ${{ env.SERVICE_NAME }}:'):
+            skip = True
+            continue
+        if skip:
+            # If we hit a new top-level service or comment (2 spaces indent)
+            if line.startswith('  #') or (line.startswith('  ') and not line.startswith('    ') and line.strip() != ''):
+                skip = False
+            else:
+                continue
+        if not skip:
+            new_lines.append(line)
+            
+    content = '\n'.join(new_lines)
+
+    # Insert the correct block
+    service_block = '''  ${{ env.SERVICE_NAME }}:
+    container_name: ${{ env.SERVICE_NAME }}
     image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest
     restart: always
+    networks:
+      - wayn-network
 '''
-        content = content.replace('services:\n', 'services:\n' + service_block)
+    content = content.replace('services:\n', 'services:\n' + service_block)
     
     # Nginx에 8013 포트 확보 (이미 있으면 스킵)
     if '8013:8013' not in content:
         # nginx 포트 섹션을 찾아 바로 아래에 추가
-        import re
-        content = re.sub(r'(\s*nginx:.*?ports:\n)', r'\1      - \"8013:8013\"\n', content, flags=re.DOTALL)
+        content = re.sub(r'(\s*nginx:.*?ports:\n)', r'\1      - "8013:8013"\n', content, flags=re.DOTALL)
         
     with open('GCE_docker-compose.prod.yml', 'w') as f:
         f.write(content)
         
-    print(\"Python update success\")
+    print("Python update success")
 except Exception as e:
     print('Failed:', e)
     sys.exit(1)
