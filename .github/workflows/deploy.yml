@@ -65,15 +65,56 @@ jobs:
             gcloud auth configure-docker asia-northeast3-docker.pkg.dev --quiet
             cd ~/wayn-deployment
             
-            if ! grep -q '${{ env.SERVICE_NAME }}:' GCE_docker-compose.prod.yml; then
-              printf '  %s:\n    image: %s-docker.pkg.dev/%s/%s/%s:latest\n    restart: always\n' '${{ env.SERVICE_NAME }}' '${{ env.REGION }}' '${{ env.PROJECT_ID }}' '${{ env.REPO_NAME }}' '${{ env.SERVICE_NAME }}' >> GCE_docker-compose.prod.yml
-            fi
+            # 파이썬으로 안전하게 docker-compose 파일의 services 항목 하위에 추가하고, 최하단에 잘못 추가된 기존 항목 제거
+            cat << 'PYEOF' > fix_compose.py
+import os, re
+file_path = 'GCE_docker-compose.prod.yml'
+with open(file_path, 'r') as f:
+    orig_text = f.read()
+
+# 1. 문서 맨 끝이나 volumes 쪽에 잘못 들어간 cafein-ai-homepage 블록 제거
+text = re.sub(r'\n\s*${{ env.SERVICE_NAME }}:\s*\n\s*image:.*?\n\s*restart:.*?\n', '\n', orig_text)
+
+# 2. 올바른 services 하위에 다시 추가 (이미 존재하지 않으면)
+if '  ${{ env.SERVICE_NAME }}:' not in text:
+    block = '''  ${{ env.SERVICE_NAME }}:
+    image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest
+    restart: always
+'''
+    text = text.replace('services:\n', 'services:\n' + block)
+
+with open(file_path, 'w') as f:
+    f.write(text)
+PYEOF
+
+            python3 fix_compose.py
             
             docker-compose -f GCE_docker-compose.prod.yml pull ${{ env.SERVICE_NAME }}
             docker-compose -f GCE_docker-compose.prod.yml up -d ${{ env.SERVICE_NAME }}
             
-            if [ ! -f nginx/conf.d/${{ env.SERVICE_NAME }}.conf ]; then
-              printf 'server {\n    listen 8013;\n    server_name _;\n\n    location / {\n        proxy_pass http://%s:80;\n        proxy_set_header Host \$host;\n        proxy_set_header X-Real-IP \$remote_addr;\n        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \$scheme;\n    }\n\n    location /api/cafein/ {\n        proxy_pass http://wayn-ai-backend:3000/api/cafein/;\n        proxy_set_header Host \$host;\n        proxy_set_header X-Real-IP \$remote_addr;\n        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \$scheme;\n    }\n}\n' '${{ env.SERVICE_NAME }}' > nginx/conf.d/${{ env.SERVICE_NAME }}.conf
-              docker-compose -f GCE_docker-compose.prod.yml restart nginx
-            fi
+            # Nginx 라우팅 설정 파일 위치 확인 후 추가
+            mkdir -p nginx/conf.d
+            cat << 'EOF' > nginx/conf.d/${{ env.SERVICE_NAME }}.conf
+server {
+    listen 8013;
+    server_name _;
+
+    location / {
+        proxy_pass http://${{ env.SERVICE_NAME }}:80;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+
+    location /api/cafein/ {
+        proxy_pass http://wayn-ai-backend:3000/api/cafein/;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+}
+EOF
+            docker-compose -f GCE_docker-compose.prod.yml restart nginx
           "
