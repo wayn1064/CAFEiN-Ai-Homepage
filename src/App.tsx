@@ -51,7 +51,7 @@ function App() {
         businessRegistrationNumber: formData.businessId,
         ...formData
       };
-      await axios.post('http://34.158.193.220/api/wayn-ai/registrations', payload);
+      await axios.post('http://34.158.193.220/api/wayn-ai/api/registrations', payload);
       setIsSuccess(true);
     } catch (error) {
       console.error('Registration error:', error);
