@@ -1,3 +1,20 @@
+Generating public/private rsa key pair.
+Your identification has been saved in /home/runner/.ssh/google_compute_engine
+Your public key has been saved in /home/runner/.ssh/google_compute_engine.pub
+The key fingerprint is:
+SHA256:VvkVygYWHzlVidUJyec52K2eEvyOcpdImggNGYfw2Hw runner@runnervm35a4x
+The key's randomart image is:
++---[RSA 3072]----+
+|    .. .  +.o+Bo=|
+|     =o .. =o* =.|
+|    . ++E o =.* o|
+|      o. . o o =.|
+|       oS  ..  ..|
+|      ...   + .  |
+|       . . + = o |
+|        . + +.*  |
+|           o.+.  |
++----[SHA256]-----+
 version: '3.8'
 
 services:
@@ -20,16 +37,8 @@ services:
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     networks:
       - wayn-network
-
-  # ==========================================
   # [메인 프록시 서버]
-  # ==========================================
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    restart: always
-    ports:
-      - "8013:8013"
+      - 8013:8013
       - "80:80"
       - "443:443"
       - "8001:8001"
@@ -46,7 +55,7 @@ services:
       - "8012:8012"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    restart: always
     networks:
       - wayn-network
 
