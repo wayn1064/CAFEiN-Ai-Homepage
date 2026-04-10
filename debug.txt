@@ -403,7 +403,6 @@ server {
     }
 }
 ==== NGINX ERROR LOG ====
-3.131.220.121 - - [10/Apr/2026:08:51:12 +0000] "\x16\x03\x01\x00{\x01\x00\x00w\x03\x03x\xEC\xB0\xFB&\xA9\xDC\xA1\xAB\xF14%\xC5\xDE\xB3P\xF4h\xC2p}2.\xC8_\x98<\xB4BK.@\x00\x00\x1A\xC0/\xC0+\xC0\x11\xC0\x07\xC0\x13\xC0\x09\xC0\x14\xC0" 400 157 "-" "-"
 3.131.220.121 - - [10/Apr/2026:08:51:29 +0000] "SSH-2.0-Go" 400 157 "-" "-"
 147.185.132.172 - - [10/Apr/2026:08:51:33 +0000] "GET / HTTP/1.1" 200 650 "-" "Hello from Palo Alto Networks, find out more about our scans in https://docs-cortex.paloaltonetworks.com/r/1/Cortex-Xpanse/Scanning-activity"
 3.131.220.121 - - [10/Apr/2026:08:52:33 +0000] "\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\xA7\x8CF\x0F\x16\xC2\x18=" 400 157 "-" "-"
@@ -453,3 +452,4 @@ server {
 64.62.197.77 - - [10/Apr/2026:09:49:46 +0000] "\x16\x03\x01\x00\xF2\x01\x00\x00\xEE\x03\x03\xCC\x9C}\xD3\xC9F\xF8\x0C%\xBC<\x08\xE5 \xB3\x9F\x05\x10`\x95P\xEC\xBC\x02\x8B\xA62.m" 400 157 "-" "-"
 64.62.197.77 - - [10/Apr/2026:09:49:46 +0000] "GET /vite.svg HTTP/1.1" 200 1497 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.21"
 64.62.197.77 - - [10/Apr/2026:09:50:22 +0000] "GET /geoserver/web/ HTTP/1.1" 200 479 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:142.0) Gecko/20100101 Firefox/142.0"
+100.51.6.16 - - [10/Apr/2026:09:52:38 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03:\xCBLcZe\xD6dw\xFF\xCB\x9E\x9B\xFD\x87-\x97\xED\xFDJ.vS\xD3\xDBwr\xDEs\x93`k \x09\x87A\x0E\xEF\x85\x97\x8B" 400 157 "-" "-"
