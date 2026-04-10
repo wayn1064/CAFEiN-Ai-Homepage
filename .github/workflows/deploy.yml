@@ -65,26 +65,14 @@ jobs:
             gcloud auth configure-docker asia-northeast3-docker.pkg.dev --quiet
             cd ~/wayn-deployment
             
-            # 잘못 위치한 cafein-ai-homepage 블록을 완전히 삭제합니다 (perl 한 줄 명령어 정규식 활용)
-            perl -0777 -pi -e 's/\n\s*${{ env.SERVICE_NAME }}:\s*\n\s*image:[^\n]+\n\s*restart: always//g' GCE_docker-compose.prod.yml
-            
-            # 올바른 services 블록 바로 밑에 다시 추가합니다.
-            if ! grep -q '  ${{ env.SERVICE_NAME }}:' GCE_docker-compose.prod.yml; then
-              perl -0777 -pi -e 's|services:\n|services:\n  ${{ env.SERVICE_NAME }}:\n    image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest\n    restart: always\n|g' GCE_docker-compose.prod.yml
-            fi
-            
+            # 컨테이너 이미지 재다운로드 및 백그라운드 재시작
             docker-compose -f GCE_docker-compose.prod.yml pull ${{ env.SERVICE_NAME }}
             docker-compose -f GCE_docker-compose.prod.yml up -d ${{ env.SERVICE_NAME }}
             
-            # Nginx 라우팅 설정 파일 생성 (한줄 출력 사용)
+            # Nginx 라우팅 설정 파일 위치 확인 후 추가
             mkdir -p nginx/conf.d
             printf 'server {\n    listen 8013;\n    server_name _;\n\n    location / {\n        proxy_pass http://%s:80;\n        proxy_set_header Host \$host;\n        proxy_set_header X-Real-IP \$remote_addr;\n        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \$scheme;\n    }\n\n    location /api/cafein/ {\n        proxy_pass http://wayn-ai-backend:3000/api/cafein/;\n        proxy_set_header Host \$host;\n        proxy_set_header X-Real-IP \$remote_addr;\n        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \$scheme;\n    }\n}\n' '${{ env.SERVICE_NAME }}' > nginx/conf.d/${{ env.SERVICE_NAME }}.conf
             
-            # docker-compose 파일의 Nginx ports 하위에 8013번 포트를 자동 맵핑 (기존에 없으면)
-            if ! grep -q '"8013:8013"' GCE_docker-compose.prod.yml; then
-              perl -0777 -pi -e 's/(^\s*nginx:.*?\n\s*ports:\n)/$1      - "8013:8013"\n/sm' GCE_docker-compose.prod.yml
-            fi
-            
-            # 포트가 추가되었으므로 restart가 아닌 up -d 로 컨테이너를 재생성해야 함
+            # Nginx 라우터용 컨테이너도 갱신
             docker-compose -f GCE_docker-compose.prod.yml up -d nginx
           "
