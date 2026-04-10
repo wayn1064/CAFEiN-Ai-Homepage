@@ -43,8 +43,8 @@ function App() {
     setErrorMsg('');
 
     try {
-      // CAFEiN-Ai 벡엔드 모듈로 전송
-      await axios.post('http://localhost:5000/api/cafein/register', formData);
+      // CAFEiN-Ai 벡엔드 모듈로 전송 (Nginx 리버스 프록시를 통해 WAYN-Ai로 라우팅됨)
+      await axios.post('/api/cafein/register', formData);
       setIsSuccess(true);
     } catch (error) {
       console.error('Registration error:', error);
