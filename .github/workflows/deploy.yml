@@ -65,14 +65,70 @@ jobs:
             gcloud auth configure-docker asia-northeast3-docker.pkg.dev --quiet
             cd ~/wayn-deployment
             
-            # 컨테이너 이미지 재다운로드 및 백그라운드 재시작
+            # Python 코드로 안전하게 YAML을 수정하여 포트 중복이나 에러를 원천 차단
+            cat << 'PYTHONEOF' > update_compose.py
+import sys, json
+
+try:
+    with open('GCE_docker-compose.prod.yml', 'r') as f:
+        content = f.read()
+
+    # cafein-ai-homepage 서비스 추가/수정
+    if '  ${{ env.SERVICE_NAME }}:' not in content:
+        service_block = '''  ${{ env.SERVICE_NAME }}:
+    image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest
+    restart: always
+'''
+        content = content.replace('services:\n', 'services:\n' + service_block)
+    
+    # Nginx에 8013 포트 확보 (이미 있으면 스킵)
+    if '8013:8013' not in content:
+        # nginx 포트 섹션을 찾아 바로 아래에 추가
+        import re
+        content = re.sub(r'(\s*nginx:.*?ports:\n)', r'\1      - \"8013:8013\"\n', content, flags=re.DOTALL)
+        
+    with open('GCE_docker-compose.prod.yml', 'w') as f:
+        f.write(content)
+        
+    print(\"Python update success\")
+except Exception as e:
+    print('Failed:', e)
+    sys.exit(1)
+PYTHONEOF
+            python3 update_compose.py
+            
             docker-compose -f GCE_docker-compose.prod.yml pull ${{ env.SERVICE_NAME }}
             docker-compose -f GCE_docker-compose.prod.yml up -d ${{ env.SERVICE_NAME }}
             
-            # Nginx 라우팅 설정 파일 위치 확인 후 추가
             mkdir -p nginx/conf.d
-            printf 'server {\n    listen 8013;\n    server_name _;\n\n    location / {\n        proxy_pass http://%s:80;\n        proxy_set_header Host \$host;\n        proxy_set_header X-Real-IP \$remote_addr;\n        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \$scheme;\n    }\n\n    location /api/cafein/ {\n        proxy_pass http://wayn-ai-backend:3000/api/cafein/;\n        proxy_set_header Host \$host;\n        proxy_set_header X-Real-IP \$remote_addr;\n        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \$scheme;\n    }\n}\n' '${{ env.SERVICE_NAME }}' > nginx/conf.d/${{ env.SERVICE_NAME }}.conf
+            # Nginx 라우팅 파일 생성 (escape 이슈 없이 순수 생성)
+            cat << 'NGINXEOF' > nginx/conf.d/${{ env.SERVICE_NAME }}.conf
+server {
+    listen 8013;
+    server_name _;
+
+    location / {
+        proxy_pass http://${{ env.SERVICE_NAME }}:80;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+
+    location /api/cafein/ {
+        proxy_pass http://wayn-ai-backend:3000/api/cafein/;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+}
+NGINXEOF
+            # \$ 기호를 $ 기호로 변경하여 Nginx 문법 에러 회피
+            sed -i 's/\\\\\\$/$/g' nginx/conf.d/${{ env.SERVICE_NAME }}.conf
+            sed -i 's/\\$/$/g' nginx/conf.d/${{ env.SERVICE_NAME }}.conf || true
             
-            # Nginx 라우터용 컨테이너도 갱신
-            docker-compose -f GCE_docker-compose.prod.yml up -d nginx
+            # 컨테이너 포트 재결합을 위해 강제 재생성 수행
+            docker-compose -f GCE_docker-compose.prod.yml up -d --force-recreate nginx
+            docker restart nginx
           "
