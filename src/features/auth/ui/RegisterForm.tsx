@@ -2,16 +2,7 @@ import React, { useState } from 'react';
 import { Building2, User, Phone, MapPin, KeyRound, CheckSquare, Layers, Search, X } from 'lucide-react';
 import DaumPostcode from 'react-daum-postcode';
 
-const solutions = [
-  { id: 'director', name: '점장실', desc: '매장 전반의 핵심 지표 모니터링 및 전자 결재' },
-  { id: 'management', name: '경영지원실', desc: '인사, 근태, 급여, 재무 등 전사 운영 지원' },
-  { id: 'clinic', name: '주방/제조', desc: '주문 레시피 내역 작성 및 주문 기록 관리' },
-  { id: 'desk', name: '카운터', desc: '고객 접수, 수납, 예약 타임라인 및 보험청구' },
-  { id: 'supply', name: '중앙공급실', desc: '카페 식자재, 재료 재고 관리 및 발주' },
-  { id: 'lab', name: '베이커리', desc: '원내/외 베이커리 의뢰 관리 및 수발주 내역' },
-  { id: 'counsel', name: '마케팅실', desc: '고객 응대, 동의서 작성 및 CRM 데이터 분석' },
-  { id: 'myoffice', name: '마이오피스', desc: '개인별 업무 일정, 연차 신청 및 사내 메신저' },
-];
+
 
 export const RegisterForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +13,6 @@ export const RegisterForm: React.FC = () => {
     address: '',
     adminId: '',
     adminPassword: '',
-    selectedSolutions: [] as string[],
   });
   const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
 
@@ -49,16 +39,6 @@ export const RegisterForm: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSolutionToggle = (id: string) => {
-    setFormData(prev => {
-      const isSelected = prev.selectedSolutions.includes(id);
-      if (isSelected) {
-        return { ...prev, selectedSolutions: prev.selectedSolutions.filter(solId => solId !== id) };
-      } else {
-        return { ...prev, selectedSolutions: [...prev.selectedSolutions, id] };
-      }
-    });
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,8 +52,8 @@ export const RegisterForm: React.FC = () => {
       password: formData.adminPassword,
       businessRegistrationNumber: formData.businessNumber,
       address: formData.address,
-      accessibleMenus: formData.selectedSolutions,
-      status: 'PENDING'
+      status: 'PENDING',
+      solutionType: 'CAFEiN-Ai'
     };
 
     try {
@@ -248,35 +228,6 @@ export const RegisterForm: React.FC = () => {
               </div>
             </section>
 
-            {/* 3. 솔루션 선택 */}
-            <section>
-              <h2 className="text-xl font-semibold text-[#1A365D] mb-6 flex items-center gap-2 border-b pb-2">
-                <Layers className="w-6 h-6" />
-                사용할 솔루션 선택 (다중 선택 가능)
-              </h2>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {solutions.map((solution) => {
-                  const isSelected = formData.selectedSolutions.includes(solution.id);
-                  return (
-                    <div
-                      key={solution.id}
-                      onClick={() => handleSolutionToggle(solution.id)}
-                      className={`cursor-pointer rounded-lg border p-4 flex items-start gap-4 transition-all ${
-                        isSelected ? 'border-[#1A365D] bg-blue-50 ring-1 ring-[#1A365D] shadow-sm' : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
-                      }`}
-                    >
-                      <div className="flex-shrink-0 mt-0.5">
-                        <CheckSquare className={`w-6 h-6 ${isSelected ? 'text-[#1A365D]' : 'text-gray-300'}`} />
-                      </div>
-                      <div>
-                        <h3 className={`font-medium ${isSelected ? 'text-[#1A365D]' : 'text-gray-900'}`}>{solution.name}</h3>
-                        <p className="text-sm text-gray-500 mt-1">{solution.desc}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
 
             {/* Submit Button */}
             {isPostcodeOpen && (

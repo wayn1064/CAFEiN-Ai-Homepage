@@ -143,6 +143,13 @@ server {
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto \$scheme;
     }
+
+    location /api/wayn-ai/ {
+        resolver 127.0.0.11 valid=30s;
+        set \$backend http://wayn-ai-backend:5001;
+        rewrite ^/api/wayn-ai/(.*)\$ /api/\$1 break;
+        proxy_pass \$backend;
+    }
 }
 NGINXEOF
             # \$ 기호를 $ 기호로 변경하여 Nginx 문법 에러 회피
