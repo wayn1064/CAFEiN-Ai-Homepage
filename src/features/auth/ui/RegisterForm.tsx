@@ -11,6 +11,7 @@ export const RegisterForm: React.FC = () => {
     directorName: '',
     phone: '',
     address: '',
+    addressDetail: '',
     adminId: '',
     adminPassword: '',
   });
@@ -51,7 +52,7 @@ export const RegisterForm: React.FC = () => {
       email: formData.adminId,
       password: formData.adminPassword,
       businessRegistrationNumber: formData.businessNumber,
-      address: formData.address,
+      address: formData.addressDetail ? `${formData.address} ${formData.addressDetail}` : formData.address,
       status: 'PENDING',
       solutionType: 'CAFEiN-Ai'
     };
@@ -163,30 +164,43 @@ export const RegisterForm: React.FC = () => {
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="address" className="block text-sm font-medium text-gray-700">주소</label>
-                  <div className="mt-1 flex rounded-md shadow-sm">
-                    <div className="relative flex-grow focus-within:z-10">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <MapPin className="h-5 w-5 text-gray-400" />
+                  <div className="space-y-2 mt-1">
+                    <div className="flex rounded-md shadow-sm">
+                      <div className="relative flex-grow focus-within:z-10">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <MapPin className="h-5 w-5 text-gray-400" />
+                        </div>
+                        <input
+                          type="text"
+                          id="address"
+                          name="address"
+                          value={formData.address}
+                          onChange={handleChange}
+                          className="focus:ring-[#1A365D] focus:border-[#1A365D] block w-full rounded-none rounded-l-md pl-10 sm:text-sm border-gray-300 p-3 border shadow-sm"
+                          placeholder="주소를 검색하세요"
+                          readOnly
+                        />
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsPostcodeOpen(true)}
+                        className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-[#1A365D] focus:border-[#1A365D] shadow-sm"
+                      >
+                        <Search className="h-5 w-5 text-gray-400" />
+                        <span>주소 검색</span>
+                      </button>
+                    </div>
+                    <div>
                       <input
                         type="text"
-                        id="address"
-                        name="address"
-                        value={formData.address}
+                        id="addressDetail"
+                        name="addressDetail"
+                        value={formData.addressDetail}
                         onChange={handleChange}
-                        className="focus:ring-[#1A365D] focus:border-[#1A365D] block w-full rounded-none rounded-l-md pl-10 sm:text-sm border-gray-300 p-3 border"
-                        placeholder="주소를 입력하세요"
-                        readOnly
+                        className="focus:ring-[#1A365D] focus:border-[#1A365D] block w-full sm:text-sm border-gray-300 rounded-md p-3 border shadow-sm"
+                        placeholder="상세 주소를 입력하세요 (예: 건물명, 층, 호수)"
                       />
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => setIsPostcodeOpen(true)}
-                      className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-[#1A365D] focus:border-[#1A365D]"
-                    >
-                      <Search className="h-5 w-5 text-gray-400" />
-                      <span>주소 검색</span>
-                    </button>
                   </div>
                 </div>
               </div>
