@@ -147,7 +147,7 @@ server {
     location /api/wayn-ai/ {
         resolver 127.0.0.11 valid=30s;
         set \$backend http://wayn-ai-backend:5001;
-        rewrite ^/api/wayn-ai/(.*)\$ /api/\$1 break;
+        rewrite ^/api/wayn-ai/(?:api/)?(.*)\$ /api/\$1 break;
         proxy_pass \$backend;
     }
 }
